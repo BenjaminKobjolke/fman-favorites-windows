@@ -512,6 +512,8 @@ def path_is_parent(parent_path, child_path):
 class SetHotDir(DirectoryPaneCommand):
 
     def __call__(self, dirNum=0):
+        show_alert(f"Hot dir stored for index: {int(dirNum)}")
+
         if dirNum < 0 or dirNum > 4:
             dirNum = 0
         HOTLIST[dirNum] = as_human_readable(self.pane.get_path())

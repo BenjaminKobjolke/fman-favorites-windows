@@ -1,0 +1,22 @@
+[
+	{ "keys": ["Shift+f"], "command": "set_favorite_directory" },
+	{ "keys": ["Ctrl+f"], "command": "remove_favorite_directory"},
+	{ "keys": ["Ctrl+0"], "command": "go_to_favorite"},
+	{ "keys": ["Ctrl+Shift+a"], "command": "set_hot_dir", "args": {"dirNum": 0}},
+	{ "keys": ["Ctrl+Shift+s"], "command": "set_hot_dir", "args": {"dirNum": 1}},
+	{ "keys": ["Ctrl+Shift+d"], "command": "set_hot_dir", "args": {"dirNum": 2}},
+	{ "keys": ["Ctrl+Shift+f"], "command": "set_hot_dir", "args": {"dirNum": 3}},
+	{ "keys": ["Alt+a"], "command": "go_to_hot_dir", "args": {"dirNum": 0}},
+	{ "keys": ["Alt+s"], "command": "go_to_hot_dir", "args": {"dirNum": 1}},
+	{ "keys": ["Alt+d"], "command": "go_to_hot_dir", "args": {"dirNum": 2}},
+	{ "keys": ["Alt+f"], "command": "go_to_hot_dir", "args": {"dirNum": 3}},
+	{ "keys": ["Ctrl+1"], "command":"pop_dir", "args": {"dirNum": 0}},
+	{ "keys": ["Ctrl+2"], "command":"pop_dir", "args": {"dirNum": 1}},
+	{ "keys": ["Ctrl+3"], "command":"pop_dir", "args": {"dirNum": 2}},
+	{ "keys": ["Ctrl+4"], "command":"pop_dir", "args": {"dirNum": 3}},
+	{ "keys": ["Ctrl+5"], "command":"pop_dir", "args": {"dirNum": 4}},
+	{ "keys": ["Ctrl+6"], "command":"pop_dir", "args": {"dirNum": 5}},
+	{ "keys": ["Ctrl+7"], "command":"pop_dir", "args": {"dirNum": 6}},
+	{ "keys": ["Ctrl+8"], "command":"pop_dir", "args": {"dirNum": 7}},
+	{ "keys": ["Ctrl+9"], "command":"pop_dir", "args": {"dirNum": 8}}
+]
