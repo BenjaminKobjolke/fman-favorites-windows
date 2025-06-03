@@ -62,9 +62,9 @@ After restarting **fman**, you will have the ability to set favorite directories
 
 `Set Favorite Dirctory Pair` - This command sets a left and right directory structure to save.
 
-`Set Shorten Directory` - This command asks the user for a shortener name and creates a new shortener to that directory.
+`Set Shorten Directory` - This command asks the user for a shortener name and creates a new shortener to that directory. Access via command palette (`Shift+Cmd+P` or `Shift+Ctrl+P`) and type "Set Shorten Directory".
 
-`Remove Shortener Directory` - This command removes a shortener directory from the shortener list. It then expands the shortener in all the favorites that had that shortener.
+`Remove Shortener Directory` - This command removes a shortener directory from the shortener list. It then expands the shortener in all the favorites that had that shortener. Access via command palette and type "Remove Shortener Directory".
 
 `Go to hot dir` - This command set the current panel to the directory store in the memory location specified in the dirNum argument. The default is 0.
 
@@ -85,6 +85,33 @@ After restarting **fman**, you will have the ability to set favorite directories
 `~/.favoritepairs` - This file contains all the pair of directories stored.
 
 `~/.hotdirs` - This file contains the four hot directory paths that persist across fman restarts. Each line contains one directory path corresponding to hot directory slots 0-3.
+
+### How to Use Shortener Directories
+
+Shortener directories are a powerful feature that allows you to create portable favorites that work across different systems. Here's how to use them:
+
+**Step 1: Set up a shortener directory**
+
+1. Navigate to a parent directory (e.g., `/Users/yourname/Dropbox`)
+2. Open the command palette (`Shift+Cmd+P` or `Shift+Ctrl+P`)
+3. Type "Set Shorten Directory" and select it
+4. Enter a shortener name (e.g., "Dropbox")
+
+**Step 2: Create favorites within the shortener**
+
+- Any favorites you create in subdirectories of your shortener will automatically use the shortener notation
+- Instead of storing `/Users/yourname/Dropbox/Projects/MyApp`, it stores `{{Dropbox}}/Projects/MyApp`
+
+**Step 3: Share across systems**
+
+- Copy your `~/.shortenerdirs` and `~/.favoritedirs` files to other systems
+- Set up the same shortener names pointing to the equivalent directories on each system
+- Your favorites will automatically work on all systems
+
+**Managing shorteners:**
+
+- Use "Remove Shortener Directory" from the command palette to delete a shortener
+- When you remove a shortener, all favorites using it are automatically expanded to full paths
 
 ### Suggested Usage
 
