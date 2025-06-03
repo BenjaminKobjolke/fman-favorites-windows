@@ -17,7 +17,8 @@ from fman.fs import is_dir
 HOMEDIR = os.path.expanduser("~")
 FAVORITELIST = HOMEDIR + "/.favoritedirs"
 SHORTENERLIST = HOMEDIR + "/.shortenerdirs"
-FAVORITEPAIRS = HOMEDIR + "/.favoritepairs" 
+FAVORITEPAIRS = HOMEDIR + "/.favoritepairs"
+HOTDIRLIST = HOMEDIR + "/.hotdirs"
 
 #
 # The next global variable is for storing short term memory
@@ -25,6 +26,36 @@ FAVORITEPAIRS = HOMEDIR + "/.favoritepairs"
 # with hotkeys. I doubt I'll ever need more than four.
 #
 HOTLIST = ["~", "~", "~", "~"]
+
+#
+# Load hot directories from file on startup
+#
+def loadHotDirs():
+    global HOTLIST
+    if os.path.isfile(HOTDIRLIST):
+        try:
+            with open(HOTDIRLIST, "r") as f:
+                lines = f.readlines()
+                for i, line in enumerate(lines[:4]):  # Only load first 4 lines
+                    HOTLIST[i] = line.strip()
+        except:
+            # If there's any error reading the file, use defaults
+            HOTLIST = ["~", "~", "~", "~"]
+
+#
+# Save hot directories to file
+#
+def saveHotDirs():
+    try:
+        with open(HOTDIRLIST, "w") as f:
+            for hotdir in HOTLIST:
+                f.write(hotdir + "\n")
+    except:
+        # Silently ignore save errors
+        pass
+
+# Load hot directories on module import
+loadHotDirs()
 
 #
 # Function:    GoToFavoritePair
@@ -517,6 +548,9 @@ class SetHotDir(DirectoryPaneCommand):
         if dirNum < 0 or dirNum > 4:
             dirNum = 0
         HOTLIST[dirNum] = as_human_readable(self.pane.get_path())
+        
+        # Save hot directories to file for persistence
+        saveHotDirs()
 
 #
 # Function:    GoToHotDir
@@ -585,3 +619,58 @@ class PopDir(DirectoryPaneCommand):
         LASTPOP = abs(LASTPOP - 1 - dirNum)
         POPPING = True
         self.pane.set_path(as_url(POPDIR[LASTPOP]))
+
+#
+# Function:    ListAllHotdirs
+#
+# Description: This class displays all currently set hot directories
+#              in an alert dialog, showing their indices and paths.
+#
+
+
+class ListAllHotdirs(DirectoryPaneCommand):
+
+    def __call__(self):
+        """Display all hot directories in an alert dialog."""
+        hotdir_info = []
+        
+        for i in range(4):  # HOTLIST has 4 slots (0-3)
+            if i < len(HOTLIST):
+                path = HOTLIST[i]
+                if path and path != "~":
+                    # Expand the path to show full directory
+                    expanded_path = expandDirPath(path)
+                    hotdir_info.append(f"Hot Dir {i}:\n{expanded_path}")
+                else:
+                    hotdir_info.append(f"Hot Dir {i}:\nNot set")
+            else:
+                hotdir_info.append(f"Hot Dir {i}:\nNot set")
+        
+        # Join all hotdir information with double newlines for spacing
+        message = "\n\n".join(hotdir_info)
+        
+        # Show the alert with all hot directory information
+        show_alert("All Hot Directories:\n\n" + message)
+
+#
+# Function:    ClearHotdirs
+#
+# Description: This class clears all hot directories, resetting them
+#              to their default state and saving the changes.
+#
+
+
+class ClearHotdirs(DirectoryPaneCommand):
+
+    def __call__(self):
+        """Clear all hot directories and reset to defaults."""
+        global HOTLIST
+        
+        # Reset all hot directories to default
+        HOTLIST = ["~", "~", "~", "~"]
+        
+        # Save the cleared state to file
+        saveHotDirs()
+        
+        # Show confirmation message
+        show_alert("All hot directories have been cleared.")

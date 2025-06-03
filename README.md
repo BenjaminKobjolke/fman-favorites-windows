@@ -10,7 +10,7 @@ After restarting **fman**, you will have the ability to set favorite directories
 
 ### HotKeys Set
 
-<Shift+f>  - Set a new Favorite directory. This makes the current directory in the active pane a favorite directory.
+<Shift+f> - Set a new Favorite directory. This makes the current directory in the active pane a favorite directory.
 
 <Ctrl+f> - Remove a Favorite Directory.
 
@@ -70,6 +70,10 @@ After restarting **fman**, you will have the ability to set favorite directories
 
 `Set hot dir` - This command set the current panel to the directory store in the memory location 1 specified in the dirNum argument. The default is 0.
 
+`List All Hotdirs` - This command displays all currently set hot directories in an alert dialog, showing their indices and full paths. Shows "Not set" for empty slots.
+
+`Clear Hotdirs` - This command clears all hot directories, resetting them to their default state. All hot directory slots will be cleared and the changes are saved persistently.
+
 `pop directory` - This command pops to the previous directory.
 
 ### Files Created and Used
@@ -80,11 +84,13 @@ After restarting **fman**, you will have the ability to set favorite directories
 
 `~/.favoritepairs` - This file contains all the pair of directories stored.
 
+`~/.hotdirs` - This file contains the four hot directory paths that persist across fman restarts. Each line contains one directory path corresponding to hot directory slots 0-3.
+
 ### Suggested Usage
 
-Once you install the plugin, set up your shortener directories. I setup one for each of my Dropbox locations. Then, create your favorites in the shorteners subdirectories. Once you have the favorites setup, move your `~/.favoritedirs` to your Dropbox location you want and  link to the original location and name. On the second system, setup the same shortener file using the same names and link the synced favoritedirs file to the normal location. Now you can go to the favorite directories inside these shortener directories easily! They also automatically update when you add new ones.
+Once you install the plugin, set up your shortener directories. I setup one for each of my Dropbox locations. Then, create your favorites in the shorteners subdirectories. Once you have the favorites setup, move your `~/.favoritedirs` to your Dropbox location you want and link to the original location and name. On the second system, setup the same shortener file using the same names and link the synced favoritedirs file to the normal location. Now you can go to the favorite directories inside these shortener directories easily! They also automatically update when you add new ones.
 
-You can also save and restore directory locations in the internal memory. There are four memory locations set aside to use. Very useful for saving a location, going somewhere else, and then popping right back to the previous location. These locations are lost when exiting fman.
+You can also save and restore directory locations in the hot directory memory. There are four hot directory locations that persist across fman restarts. Very useful for saving frequently accessed locations that you want to quickly return to. Use the hotkeys to set and navigate to these locations, or use the command palette to list or clear all hot directories.
 
 ### Features
 
@@ -95,6 +101,7 @@ You can also save and restore directory locations in the internal memory. There 
 - Remove a favorite directory.
 - Remove a favorite directory pair.
 - Set up directories as shorteners with a name. Then all paths under that directory will be set to the shortener's name and expanded to that path when going to it. This gives the ability to share favorites between system just using the paths in common.
-- There are four memory locations to set directory values that can be easily recalled as well. Store from any panel and restore to any panel.
+- There are four persistent hot directory locations that can be easily recalled and persist across fman restarts. Store from any panel and restore to any panel.
+- List all hot directories with their current paths in a formatted display.
+- Clear all hot directories at once to reset them to defaults.
 - The ability to backtrack previously visited directories. Not panel specific.
-
