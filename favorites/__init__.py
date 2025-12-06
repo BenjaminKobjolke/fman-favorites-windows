@@ -472,6 +472,8 @@ def expandDirPath(dir):
             with open(SHORTENERLIST, "r") as f:
                 shorteners = f.readlines()
                 for shortener in shorteners:
+                    if '|' not in shortener:
+                        continue
                     shortName, shortPath = shortener.strip().split('|')
                     if match.group(1) == shortName:
                         dirName = shortPath + dir[match.end(1) + 2:]
@@ -494,6 +496,8 @@ def shortenDirPath(dir):
         with open(SHORTENERLIST, "r") as f:
             shorteners = f.readlines()
             for shortener in shorteners:
+                if '|' not in shortener:
+                    continue
                 pathName, path = shortener.strip().split('|')
                 if path_is_parent(path, dirName):
                     dirName = "{{" + pathName + "}}/" + \
